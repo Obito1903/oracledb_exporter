@@ -46,6 +46,8 @@ go-build:
 	cp default-metrics.toml $(OUTDIR)/$(DIST_DIR)
 	(cd dist ; tar cfz oracledb_exporter-$(VERSION).$(GOOS)-$(GOARCH).tar.gz oracledb_exporter-$(VERSION).$(GOOS)-$(GOARCH))
 
+go-build-no-glibc-linux-amd64:
+	CGO_ENABLED=0 GOOS=linux GOARCH=amd64 $(MAKE) go-build -j2
 .PHONY: go-build-linux-amd64
 go-build-linux-amd64:
 	GOOS=linux GOARCH=amd64 $(MAKE) go-build -j2
